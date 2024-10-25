@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.math-block {
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+/* Optional: Add some spacing around inline math */
+.katex-display {
+  margin: 1.5rem 0 !important;
+}

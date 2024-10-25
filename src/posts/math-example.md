@@ -4,8 +4,6 @@ date: 2024-10-25
 tags: math
 ---
 
-# Testing Math Rendering
-
 Here's an inline equation: $E = mc^2$
 
 And here's a block equation:

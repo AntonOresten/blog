@@ -8,7 +8,7 @@ import 'katex/dist/katex.min.css'  // Important: Add this import
 
 function App() {
   const [posts, setPosts] = useState([])
-  const [selectedTag, setSelectedTag] = useState('all')
+  const [selectedTag, setSelectedTag] = useState('Filter by tag')
 
   useEffect(() => {
     marked.setOptions({

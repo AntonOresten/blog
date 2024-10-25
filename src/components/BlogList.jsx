@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
 import { theme } from '../styles/theme'
-import { marked } from 'marked'
 
 export function BlogList({ posts, selectedTag, setSelectedTag }) {
-  const allTags = ['all', ...new Set(posts.flatMap(post => post.tags))]
-  const filteredPosts = selectedTag === 'all' 
+  const allTags = ['Filter by tag', ...new Set(posts.flatMap(post => post.tags))]
+  const filteredPosts = selectedTag === 'Filter by tag' 
     ? posts 
     : posts.filter(post => post.tags.includes(selectedTag))
 
@@ -19,7 +18,7 @@ export function BlogList({ posts, selectedTag, setSelectedTag }) {
         >
           {allTags.map(tag => (
             <option key={tag} value={tag}>
-              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              {tag.charAt(0) + tag.slice(1)}
             </option>
           ))}
         </select>
@@ -38,19 +37,31 @@ export function BlogList({ posts, selectedTag, setSelectedTag }) {
               <h2 className={`${theme.text.subtitle} group-hover:text-blue-600 mb-3 transition-colors duration-300`}>
                 {post.title}
               </h2>
-              <div 
-                className={`${theme.text.body} mb-4 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-12 after:bg-gradient-to-t after:from-white after:to-transparent`}
-              >
-                <div dangerouslySetInnerHTML={{ 
-                  __html: marked(post.preview) 
-                }} />
+              
+              <div className="relative h-[120px] overflow-hidden">
+                <div 
+                  className={theme.text.body}
+                  dangerouslySetInnerHTML={{ 
+                    __html: post.preview 
+                  }} 
+                />
+                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white to-transparent" />
               </div>
-              <div className="flex gap-2">
-                {post.tags.map(tag => (
-                  <span key={tag} className="text-sm bg-gray-100 px-2 py-1 rounded">
-                    {tag}
-                  </span>
-                ))}
+
+              <div className="mt-4 flex items-center gap-4">
+                <time className="text-sm text-gray-500 font-medium">
+                  {new Date(post.date).toLocaleDateString()}
+                </time>
+                <div className="flex gap-2">
+                  {post.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </Link>
